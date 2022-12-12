@@ -1,0 +1,12 @@
+.home-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: yellowgreen;
+  height: 100%;
+
+  .home-title {
+    text-align: center;
+  }
+}
