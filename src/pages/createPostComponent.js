@@ -9,22 +9,22 @@ export const CreatePostComponent = () => {
 
       <div className="mb-3">
         <label htmlFor="exampleFormControlInput1" className="form-label">Summary</label>
-        <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="Enter your summary" />
+        <input type="email" className="form-control" placeholder="Enter your summary" />
       </div>
       <div className="mb-3">
         <label htmlFor="exampleFormControlTextarea1" className="form-label">Text</label>
-        <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter your article text"></textarea>
+        <textarea className="form-control" placeholder="Enter your article text"></textarea>
       </div>
 
       <div className="input-group mb-3">
         <select className="form-select" id="inputGroupSelect02">
           <option selected>Note</option>
-          <option value="2">News</option>
+          <option value="1">News</option>
         </select>
         <label className="input-group-text" htmlFor="inputGroupSelect02">Options</label>
       </div>
 
-      <button type="button" className="btn btn-success">Start</button>
+      <button type="button" className="btn btn-success">Save</button>
 
     </div>
   )
