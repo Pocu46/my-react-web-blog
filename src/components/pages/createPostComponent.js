@@ -1,5 +1,5 @@
 import React from "react";
-import '../styles/createPostComponent.scss'
+import '../../styles/createPostComponent.scss'
 
 export const CreatePostComponent = () => {
   return(
