@@ -1,10 +1,11 @@
 import React from "react";
-import '../../styles/Article.scss'
-import {CreatePostComponent} from "./createPostComponent";
+import './Article.scss'
+import {CreatePostComponent} from "../CreatePostComponent/CreatePostComponent";
+import WrapperComponent from "../../UI/WrapperComponent/WrapperComponent";
 
 export const Article = () => {
   return(
-    <div className="article-wrapper">
+    <WrapperComponent className="article-wrapper">
 
       <ul className="nav nav-tabs">
         <li className="nav-item">
@@ -20,6 +21,6 @@ export const Article = () => {
 
       <CreatePostComponent />
 
-    </div>
+    </WrapperComponent>
   )
 }

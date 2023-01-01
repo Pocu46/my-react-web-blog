@@ -1,0 +1,35 @@
+.modal-wrapper {
+  display: flex;
+  //flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.45);
+  height: 100vh;
+  width: 100%;
+  z-index: 10;
+  .modal-body__wrapper {
+    justify-content: center;
+    align-items: center;
+    height: 350px;
+    width: 750px;
+    background: aliceblue;
+    border-radius: 50px;
+    z-index: 12;
+    .modal-header {
+      background: darkblue;
+      color: aliceblue;
+      text-align: center;
+      justify-content: center;
+      border-radius: 50px;
+      height: 100px;
+    }
+    .modal-footer {
+      justify-content: center;
+      align-items: flex-end;
+      .modal-button {
+        height: 46px;
+        width: 150px;
+      }
+    }
+  }
+}

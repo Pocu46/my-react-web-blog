@@ -1,9 +1,10 @@
 import React from "react";
-import '../../styles/createPostComponent.scss'
+import './CreatePostComponent.scss'
+import WrapperComponent from "../../UI/WrapperComponent/WrapperComponent";
 
 export const CreatePostComponent = () => {
   return(
-    <div className="createPostComponent-wrapper">
+    <WrapperComponent className="createPostComponent-wrapper">
 
       <h2 className="createPostComponent-header">Create New Post</h2>
 
@@ -13,7 +14,7 @@ export const CreatePostComponent = () => {
       </div>
       <div className="mb-3">
         <label htmlFor="exampleFormControlTextarea1" className="form-label">Text</label>
-        <textarea className="form-control" placeholder="Enter your article text"></textarea>
+        <textarea className="form-control" placeholder="Enter your article text" />
       </div>
 
       <div className="input-group mb-3">
@@ -26,6 +27,6 @@ export const CreatePostComponent = () => {
 
       <button type="button" className="btn btn-success">Save</button>
 
-    </div>
+    </WrapperComponent>
   )
 }
