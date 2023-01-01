@@ -1,5 +1,6 @@
 import React from "react";
 import '../../styles/Home.scss'
+import Button from "../UI/Button/Button";
 
 export const Home = () => {
     return(
@@ -11,7 +12,8 @@ export const Home = () => {
               Add articles and save them to favorites
             </p>
 
-            <button type="button" className="btn btn-success">Start</button>
+            {/*<button type="button" className="btn btn-success">Start</button>*/}
+            <Button className="home-button">Start</Button>
 
         </div>
     )
