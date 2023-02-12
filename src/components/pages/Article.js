@@ -1,5 +1,5 @@
 import React from "react";
-import '../styles/Article.scss'
+import '../../styles/Article.scss'
 import {CreatePostComponent} from "./createPostComponent";
 
 export const Article = () => {

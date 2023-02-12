@@ -1,6 +1,6 @@
 import './App.scss';
-import {Home} from "./pages/Home";
-import {Article} from "./pages/Article";
+import {Home} from "./components/pages/Home";
+import {Article} from "./components/pages/Article";
 
 const App = () => {
   return (
