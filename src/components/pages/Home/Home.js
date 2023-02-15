@@ -1,10 +1,15 @@
 import React from "react";
 import './Home.scss'
 import Button from "../../UI/Button/Button";
-import WrapperComponent from "../../UI/WrapperComponent/WrapperComponent";
-import Modal from "../../UI/Modal/Modal";
+import {useNavigate} from "react-router-dom";
 
 export const Home = () => {
+  const navigete = useNavigate()
+
+  const startAppHandler = () => {
+    navigete('/create')
+  }
+
   return (
     <div className="home-wrapper">
 
@@ -14,8 +19,7 @@ export const Home = () => {
         Add articles and save them to favorites
       </p>
 
-      <Button type="button" className="home-button" onClick={() => console.log('clicked!')}>Start</Button>
-      <Modal summary="Test" message="Test message" />
+      <Button type="button" className="home-button" onClick={startAppHandler}>Start</Button>
 
     </div>
   )

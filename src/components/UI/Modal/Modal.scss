@@ -8,27 +8,37 @@
   width: 100%;
   z-index: 10;
   .modal-body__wrapper {
-    justify-content: center;
-    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
     height: 350px;
     width: 750px;
     background: aliceblue;
-    border-radius: 50px;
+    border-radius: 21px;
     z-index: 12;
     .modal-header {
       background: darkblue;
       color: aliceblue;
       text-align: center;
       justify-content: center;
-      border-radius: 50px;
+      border-radius: 21px;
       height: 100px;
     }
+    .modal-text {
+      color: darkred;
+      padding: 15px;
+      font-size: 36px;
+    }
     .modal-footer {
+      //display: flex;
       justify-content: center;
       align-items: flex-end;
+      //border: 2px solid black;
       .modal-button {
         height: 46px;
         width: 150px;
+        margin: 10px;
       }
     }
   }

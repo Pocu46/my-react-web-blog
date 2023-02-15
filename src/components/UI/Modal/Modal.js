@@ -7,13 +7,19 @@ const Modal = props => {
     <div className="modal-wrapper" onClick={()=>console.log('modal wrapper clicked')}>
       <form className="modal-body__wrapper">
         <header className="modal-header">
-          <h2>{props.summary}</h2>
+          <h1>{props.summary}</h1>
         </header>
 
-        <p className="text-center">{props.message}</p>
+        <p className="text-center modal-text">{props.message}</p>
 
         <footer className="modal-footer">
-          <Button className="modal-button" type="submit" onClick={()=>console.log('modal button clicked')}>Ok</Button>
+          <Button
+            className="modal-button"
+            type="submit"
+            onClick={()=>console.log('modal button clicked')}
+          >
+            Ok
+          </Button>
         </footer>
 
       </form>
