@@ -1,3 +1,17 @@
 .createPostComponent-wrapper {
 
 }
+
+input.error-message__input,textarea.error-message__input {
+  border: 1px solid red;
+  background: #f1d1d1;
+}
+
+input.error-message__input:focus,textarea.error-message__input:focus {
+  border: 1px solid red;
+  background: #f1d1d1;
+}
+
+.error-message {
+  color: red;
+}

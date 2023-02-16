@@ -1,8 +1,8 @@
 import {configureStore} from "@reduxjs/toolkit";
-import createCartSlice from "./create-cart-slice";
+import createPostSlice from "./create-post-slice";
 
 const store = configureStore({
-  reducer: { createPost: createCartSlice.reducer }
+  reducer: { createPost: createPostSlice.reducer }
 })
 
 export default store;

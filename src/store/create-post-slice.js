@@ -1,8 +1,8 @@
 const {createSlice} = require("@reduxjs/toolkit");
 
-const createCartSlice = createSlice(
+const createPostSlice = createSlice(
   {
-    name: 'createCart',
+    name: 'createPost',
     initialState: {
       summary: null,
       text: null,
@@ -18,6 +18,6 @@ const createCartSlice = createSlice(
   }
 )
 
-export const createCartActions = createCartSlice.actions;
+export const createPostActions = createPostSlice.actions;
 
-export default createCartSlice;
+export default createPostSlice;

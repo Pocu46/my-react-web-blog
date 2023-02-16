@@ -1,17 +1,28 @@
-import React, {useEffect, useRef} from "react";
-import './CreatePostComponent.scss'
+import React, {useEffect, useRef, useState} from "react";
+import './CreatePostComponent.scss';
 import WrapperComponent from "../../UI/WrapperComponent/WrapperComponent";
 import Button from "../../UI/Button/Button";
 import {useDispatch, useSelector} from "react-redux";
-import {createCartActions} from "../../../store/create-cart-slice";
+import {createPostActions} from "../../../store/create-post-slice";
+import {sendPostData} from "../../../store/create-post-actions";
+
+const setError = (ref, setMessage) => {
+  if(ref.current.value.trim().length < 3) {
+    setMessage(true)
+    ref.current.focus()
+  }
+}
 
 export const CreatePostComponent = () => {
   const dispatch = useDispatch()
-  const createCartText = useSelector(state => state.createCart)
+  const post = useSelector(state => state.createPost)
 
   const summaryRef = useRef('')
   const textRef = useRef('')
   const typeRef = useRef('Note')
+
+  const [summaryError, setSummaryError] = useState(false)
+  const [textError, setTextError] = useState(false)
 
   const summaryChangeHandler = (event) => {
     summaryRef.current.value = event.target.value
@@ -23,15 +34,19 @@ export const CreatePostComponent = () => {
 
   const typeChangeHandler = (event) => {
     typeRef.current.value = event.target.value
-    let index = event.nativeEvent.target.selectedIndex;
-    typeRef.current.value = event.nativeEvent.target[index].text
-    console.log(typeRef.current.value)
   }
 
-  const createPostHandler = (event) => {
-    dispatch(createCartActions.addNewPost({
-      summary: summaryRef.current.value,
-      text: textRef.current.value,
+  const createPostHandler = () => {
+    setError(summaryRef,setSummaryError)
+    setError(textRef,setTextError)
+
+    if(summaryError || textError) {
+      return
+    }
+
+    dispatch(createPostActions.addNewPost({
+      summary: summaryRef.current.value.trim(),
+      text: textRef.current.value.trim(),
       type: typeRef.current.value
     }))
 
@@ -40,10 +55,12 @@ export const CreatePostComponent = () => {
     typeRef.current.value = 'Note'
   }
 
-  // useEffect(() => {
-  //   console.log('effect works')
-  //   console.log(createCartText.summary, createCartText.text, createCartText.type)
-  // }, [createCartText])
+  useEffect(() => {
+    dispatch(sendPostData(post))
+  }, [post])
+
+  const summaryClass = summaryError ? 'error-message__input' : ''
+  const textClass = textError ? 'error-message__input' : ''
 
   return (
     <WrapperComponent className="createPostComponent-wrapper">
@@ -51,35 +68,38 @@ export const CreatePostComponent = () => {
       <h2 className="createPostComponent-header">Create New Post</h2>
 
       <div className="mb-3">
-        <label className="form-label">Summary</label>
+        <label className="form-label">Summary *</label>
         <input
           ref={summaryRef}
-          // value={summaryRef}
           onChange={summaryChangeHandler}
-          type="text" className="form-control"
+          type="text"
+          className={`form-control ${summaryClass}`}
           placeholder="Enter your summary"
         />
+        {summaryError && <p className="error-message">Summary should have at least 3 characters</p>}
       </div>
       <div className="mb-3">
-        <label className="form-label">Text</label>
+        <label className="form-label">Text *</label>
         <textarea
           ref={textRef}
           onChange={textChangeHandler}
-          // value={textRef}
-          className="form-control"
+          className={`form-control ${textClass}`}
           placeholder="Enter your article text"
         />
+        {textError && <p className="error-message">Text should have at least 3 characters</p>}
       </div>
 
       <div className="input-group mb-3">
-        <select ref={typeRef} onChange={typeChangeHandler} value={typeRef} className="form-select" >
+        <select ref={typeRef} onChange={typeChangeHandler} className="form-select" >
           <option defaultValue>Note</option>
-          <option value="1">News</option>
+          <option >News</option>
         </select>
         <label className="input-group-text">Options</label>
       </div>
 
       <Button type="button" className="btn btn-success" onClick={createPostHandler}>Save</Button>
+
+      {/*<p>{}</p>*/}
 
     </WrapperComponent>
   )
