@@ -5,9 +5,12 @@ import Button from "../../UI/Button/Button";
 import {useDispatch, useSelector} from "react-redux";
 import {createPostActions} from "../../../store/create-post-slice";
 import {sendPostData} from "../../../store/create-post-actions";
+import Notification from "../../Notification/Notification";
+
+let isInitial = true
 
 const setError = (ref, setMessage) => {
-  if(ref.current.value.trim().length < 3) {
+  if (ref.current.value.trim().length < 3) {
     setMessage(true)
     ref.current.focus()
   }
@@ -16,6 +19,7 @@ const setError = (ref, setMessage) => {
 export const CreatePostComponent = () => {
   const dispatch = useDispatch()
   const post = useSelector(state => state.createPost)
+  const notification = useSelector(state => state.ui.notification)
 
   const summaryRef = useRef('')
   const textRef = useRef('')
@@ -37,10 +41,15 @@ export const CreatePostComponent = () => {
   }
 
   const createPostHandler = () => {
-    setError(summaryRef,setSummaryError)
-    setError(textRef,setTextError)
+    setError(summaryRef, setSummaryError)
+    setError(textRef, setTextError)
 
     if(summaryError || textError) {
+      return
+    }
+
+    if(isInitial) {
+      isInitial = false
       return
     }
 
@@ -90,16 +99,20 @@ export const CreatePostComponent = () => {
       </div>
 
       <div className="input-group mb-3">
-        <select ref={typeRef} onChange={typeChangeHandler} className="form-select" >
+        <select ref={typeRef} onChange={typeChangeHandler} className="form-select">
           <option defaultValue>Note</option>
-          <option >News</option>
+          <option>News</option>
         </select>
         <label className="input-group-text">Options</label>
       </div>
 
       <Button type="button" className="btn btn-success" onClick={createPostHandler}>Save</Button>
 
-      {/*<p>{}</p>*/}
+      {notification && <Notification
+        status={notification.status}
+        title={notification.title}
+        message={notification.message}
+      />}
 
     </WrapperComponent>
   )
