@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {createPostActions} from "../../../store/create-post-slice";
 import {sendPostData} from "../../../store/create-post-actions";
 import Notification from "../../Notification/Notification";
+import {uiActions} from "../../../store/ui-slice";
 
 let isInitial = true
 
@@ -20,6 +21,7 @@ export const CreatePostComponent = () => {
   const dispatch = useDispatch()
   const post = useSelector(state => state.createPost)
   const notification = useSelector(state => state.ui.notification)
+  const show = useSelector(state => state.ui.notificationIsVisible)
 
   const summaryRef = useRef('')
   const textRef = useRef('')
@@ -48,11 +50,6 @@ export const CreatePostComponent = () => {
       return
     }
 
-    if(isInitial) {
-      isInitial = false
-      return
-    }
-
     dispatch(createPostActions.addNewPost({
       summary: summaryRef.current.value.trim(),
       text: textRef.current.value.trim(),
@@ -65,8 +62,23 @@ export const CreatePostComponent = () => {
   }
 
   useEffect(() => {
+    console.log(show, 'before if')
+    if(isInitial) {
+      isInitial = false
+
+      return
+    }
+
+    dispatch(uiActions.toggle())
+    console.log(show, 'effect started')
     dispatch(sendPostData(post))
-  }, [post])
+
+    const timer = setTimeout(() => {
+      dispatch(uiActions.toggle())
+    }, 2000)
+
+    return () => clearTimeout(timer)
+  }, [post, dispatch])
 
   const summaryClass = summaryError ? 'error-message__input' : ''
   const textClass = textError ? 'error-message__input' : ''
@@ -75,6 +87,12 @@ export const CreatePostComponent = () => {
     <WrapperComponent className="createPostComponent-wrapper">
 
       <h2 className="createPostComponent-header">Create New Post</h2>
+
+      {show && <Notification
+        status={notification.status}
+        title={notification.title}
+        message={notification.message}
+      />}
 
       <div className="mb-3">
         <label className="form-label">Summary *</label>
@@ -107,12 +125,6 @@ export const CreatePostComponent = () => {
       </div>
 
       <Button type="button" className="btn btn-success" onClick={createPostHandler}>Save</Button>
-
-      {notification && <Notification
-        status={notification.status}
-        title={notification.title}
-        message={notification.message}
-      />}
 
     </WrapperComponent>
   )

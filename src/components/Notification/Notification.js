@@ -14,8 +14,8 @@ const Notification = ({status, title, message}) => {
 
   return(
     <section className={cssClasses}>
-      <h2>{title}</h2>
-      <p>{message}</p>
+      <h2 className="notification-text">{title}</h2>
+      <p className="notification-text">{message}</p>
     </section>
   )
 }
