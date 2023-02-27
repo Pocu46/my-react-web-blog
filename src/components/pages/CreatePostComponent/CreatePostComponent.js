@@ -3,8 +3,8 @@ import './CreatePostComponent.scss';
 import WrapperComponent from "../../UI/WrapperComponent/WrapperComponent";
 import Button from "../../UI/Button/Button";
 import {useDispatch, useSelector} from "react-redux";
-import {createPostActions} from "../../../store/create-post-slice";
-import {sendPostData} from "../../../store/create-post-actions";
+import {createPostActions} from "../../../store/create-post/create-post-slice";
+import {sendPostData} from "../../../store/create-post/create-post-actions";
 import Notification from "../../Notification/Notification";
 import {uiActions} from "../../../store/ui-slice";
 
@@ -78,7 +78,7 @@ export const CreatePostComponent = () => {
     }, 2000)
 
     return () => clearTimeout(timer)
-  }, [post, dispatch])
+  }, [post, dispatch, show])
 
   const summaryClass = summaryError ? 'error-message__input' : ''
   const textClass = textError ? 'error-message__input' : ''

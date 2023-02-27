@@ -2,7 +2,7 @@ import React from "react";
 import WrapperComponent from "../../UI/WrapperComponent/WrapperComponent";
 import Post from "../Post/Post";
 
-const PostsList = () => {
+const PostLists = () => {
   return(
     <WrapperComponent>
       <Post
@@ -14,4 +14,4 @@ const PostsList = () => {
   )
 }
 
-export default PostsList;
+export default PostLists;

@@ -8,10 +8,10 @@ const Post = ({summary, text, type}) => {
     <WrapperComponent className="post-wrapper">
       <header className="post-header">
         {summary}
-        <span>{type || 'Note'}</span>
+        <span className="post-header__type">{type || 'Note'}</span>
       </header>
 
-      <p>{text}</p>
+      <p className="post-text">{text}</p>
 
       <footer className="post-footer">
         <Button

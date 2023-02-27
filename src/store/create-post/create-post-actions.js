@@ -1,4 +1,4 @@
-import {uiActions} from "./ui-slice";
+import {uiActions} from "../ui-slice";
 
 export const sendPostData = post => {
   return async dispatch => {

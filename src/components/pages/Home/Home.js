@@ -1,13 +1,13 @@
 import React from "react";
 import './Home.scss'
 import Button from "../../UI/Button/Button";
-import {useNavigate} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 
 export const Home = () => {
-  const navigete = useNavigate()
+  const navigate = useNavigate()
 
   const startAppHandler = () => {
-    navigete('/create')
+    navigate('/post')
   }
 
   return (
@@ -16,7 +16,7 @@ export const Home = () => {
       <h1 className="home-title">My React Web Blog</h1>
 
       <p className="home-text">
-        Add articles and save them to favorites
+        Add articles and save them to favorites.
       </p>
 
       <Button type="button" className="home-button" onClick={startAppHandler}>Start</Button>
