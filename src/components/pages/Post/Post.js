@@ -7,7 +7,7 @@ const Post = ({summary, text, type}) => {
   return (
     <WrapperComponent className="post-wrapper">
       <header className="post-header">
-        {summary}
+        <p>{summary}</p>
         <span className="post-header__type">{type || 'Note'}</span>
       </header>
 

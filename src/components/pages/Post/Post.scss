@@ -1,18 +1,25 @@
 .post-wrapper {
   border: 2px solid #d2d2d2;
   border-radius: 5px;
+  margin: 10px 0;
 
   .post-header {
     background: #d2d2d2;
     display: flex;
     justify-content: space-around;
+    align-items: center;
 
 
     .post-header__type {
       color: white;
-      background: #3434e3;
+      background: #1d7aea;
       border-radius: 10px;
-      //width: 35px;
+      width: 93px;
+      height: 36px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 
@@ -21,6 +28,8 @@
     display: flex;
     justify-content: space-around;
     text-align: left;
+    height: 150px;
+    overflow-scrolling: auto;
   }
 
   .post-footer {
@@ -29,16 +38,19 @@
     justify-content: center;
 
     .blue {
-      background: #3434e3;
+      background: #1d7aea;
+      width: 120px;
     }
 
     .green {
       background: #1d721d;
+      width: 120px;
     }
 
     .red {
       background: red;
       margin: 0 15px;
+      width: 120px;
     }
   }
 }

@@ -1,7 +1,6 @@
 import React from "react";
 import './Header.scss';
-import {Outlet} from 'react-router-dom';
-import {NavLink} from "react-bootstrap";
+import {NavLink, Outlet} from 'react-router-dom';
 
 const Header = () => {
   return(

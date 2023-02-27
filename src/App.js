@@ -1,26 +1,11 @@
 import './App.scss';
 import {Home} from "./components/pages/Home/Home";
 import {Article} from "./components/pages/Article/Article";
-import {createBrowserRouter, Outlet} from "react-router-dom";
+import {createBrowserRouter} from "react-router-dom";
 import PostLists from "./components/pages/PostsList/PostLists";
-import NotFound from "./components/pages/ErrorPage/ErrorPage";
 import Header from "./components/UI/Header/Header";
 import {CreatePostComponent} from "./components/pages/CreatePostComponent/CreatePostComponent";
 import ErrorPage from "./components/pages/ErrorPage/ErrorPage";
-
-
-// const routeDefinitions = createRoutesFromElements(
-//   <Routes>
-//     <Route path="/" element={<Header />}>
-//       <Route index element={<Home />} />
-//       <Route path="/article" element={<Article />} />
-//       <Route path="*" element={<NotFound />} />
-//       <Route path="/posts" element={<PostLists />} />
-//     </Route>
-//   </Routes>
-// )
-//
-// export const router = createBrowserRouter(routeDefinitions)
 
 export const router = createBrowserRouter([
   {
@@ -29,11 +14,11 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: '/',
+        index: true,
         element: <Home />
       },
       {
-        path: '/post/',
+        path: 'post',
         element: <Article />,
         children: [
           {
@@ -43,6 +28,10 @@ export const router = createBrowserRouter([
           {
             path: 'lists',
             element: <PostLists />
+          },
+          {
+            path: 'favorites',
+            element: <h1>Favorites</h1>
           },
         ]
       }
