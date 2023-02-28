@@ -7,7 +7,7 @@ export const Home = () => {
   const navigate = useNavigate()
 
   const startAppHandler = () => {
-    navigate('/post')
+    navigate('/post/create')
   }
 
   return (

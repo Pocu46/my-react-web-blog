@@ -1,10 +1,10 @@
 .post-wrapper {
-  border: 2px solid #d2d2d2;
+  border: 2px solid #dedee5;
   border-radius: 5px;
   margin: 10px 0;
 
   .post-header {
-    background: #d2d2d2;
+    background: #dedee5;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -12,7 +12,7 @@
 
     .post-header__type {
       color: white;
-      background: #1d7aea;
+      background: green;
       border-radius: 10px;
       width: 93px;
       height: 36px;
@@ -33,7 +33,7 @@
   }
 
   .post-footer {
-    background: #d2d2d2;
+    background: #dedee5;
     display: flex;
     justify-content: center;
 
@@ -42,8 +42,8 @@
       width: 120px;
     }
 
-    .green {
-      background: #1d721d;
+    .yellow {
+      background: #dede01;
       width: 120px;
     }
 

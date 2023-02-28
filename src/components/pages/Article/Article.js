@@ -11,12 +11,10 @@ export const Article = () => {
 
       <ul className="nav nav-tabs">
         <li className="nav-item">
-          {/*<NavLink className="nav-link" to="/post/lists">Posts</NavLink>*/}
           <NavLink className={linkClass} to="lists">Posts</NavLink>
         </li>
         <li className="nav-item">
           <NavLink className={linkClass} to="create" aria-current="page">Create</NavLink>
-          {/*<NavLink className="nav-link active" end to="/post/create">Create</NavLink>*/}
         </li>
         <li className="nav-item">
           <NavLink className="nav-link" to="favorites">Favorites</NavLink>

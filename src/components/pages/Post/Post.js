@@ -7,7 +7,9 @@ const Post = ({summary, text, type}) => {
   return (
     <WrapperComponent className="post-wrapper">
       <header className="post-header">
-        <p>{summary}</p>
+        <p>
+          <b>{summary}</b>
+        </p>
         <span className="post-header__type">{type || 'Note'}</span>
       </header>
 
@@ -15,7 +17,7 @@ const Post = ({summary, text, type}) => {
 
       <footer className="post-footer">
         <Button
-          className="green"
+          className="blue"
           type="button"
           onClick={() => console.log('Edit')}
         >
@@ -29,7 +31,7 @@ const Post = ({summary, text, type}) => {
           Delete
         </Button>
         <Button
-          className="blue"
+          className="yellow"
           type="button"
           onClick={() => console.log('Favorite')}
         >
