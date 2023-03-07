@@ -2,9 +2,9 @@ import './App.scss';
 import {Home} from "./components/pages/Home/Home";
 import {Article} from "./components/pages/Article/Article";
 import {createBrowserRouter} from "react-router-dom";
-import PostLists, {postListsLoader} from "./components/pages/PostsList/PostLists";
+import PostLists, {postsLoader} from "./components/pages/PostsList/PostLists";
 import Header from "./components/UI/Header/Header";
-import {CreatePostComponent} from "./components/pages/CreatePostComponent/CreatePostComponent";
+import {CreatePostComponent, sendPost} from "./components/pages/CreatePostComponent/CreatePostComponent";
 import ErrorPage from "./components/pages/ErrorPage/ErrorPage";
 
 export const router = createBrowserRouter([
@@ -23,12 +23,13 @@ export const router = createBrowserRouter([
         children: [
           {
             path: 'create',
-            element: <CreatePostComponent />
+            element: <CreatePostComponent />,
+            action: sendPost
           },
           {
             path: 'lists',
             element: <PostLists />,
-            loader: postListsLoader
+            loader: postsLoader
           },
           {
             path: 'favorites',

@@ -12,7 +12,7 @@
 
     .post-header__type {
       color: white;
-      background: green;
+      background: yellowgreen;
       border-radius: 10px;
       width: 93px;
       height: 36px;
@@ -20,6 +20,10 @@
       display: flex;
       justify-content: center;
       align-items: center;
+    }
+
+    .news {
+      background: #802be7;
     }
   }
 

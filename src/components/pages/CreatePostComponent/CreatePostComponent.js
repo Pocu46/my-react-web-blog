@@ -1,164 +1,108 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useState} from "react";
 import './CreatePostComponent.scss';
 import WrapperComponent from "../../UI/WrapperComponent/WrapperComponent";
 import Button from "../../UI/Button/Button";
-import {useDispatch, useSelector} from "react-redux";
-import {createPostActions} from "../../../store/create-post/create-post-slice";
-import {sendPostData} from "../../../store/create-post/create-post-actions";
+import {Form, json, redirect, useNavigation, useLoaderData} from "react-router-dom";
 import Notification from "../../Notification/Notification";
-import {uiActions} from "../../../store/ui-slice";
-import {Form} from "react-router-dom";
-
-// let isInitial = true
-//
-// const setError = (ref, setMessage) => {
-//   if (ref.current.value.trim().length < 3) {
-//     setMessage(true)
-//     ref.current.focus()
-//   }
-// }
+import moment from 'moment';
 
 export const CreatePostComponent = () => {
-//   // const dispatch = useDispatch()
-//   // const post = useSelector(state => state.createPost)
-//   // const notification = useSelector(state => state.ui.notification)
-//   // const show = useSelector(state => state.ui.notificationIsVisible)
-//   //
-//   const summaryRef = useRef('')
-//   const textRef = useRef('')
-//   const typeRef = useRef('Note')
-//   //
-//   // const [summaryError, setSummaryError] = useState(false)
-//   // const [textError, setTextError] = useState(false)
-//   //
-//   const summaryChangeHandler = (event) => {
-//     summaryRef.current.value = event.target.value
-//   }
-//
-//   const textChangeHandler = (event) => {
-//     textRef.current.value = event.target.value
-//   }
-//   //
-//   const typeChangeHandler = (event) => {
-//     typeRef.current.value = event.target.value
-//   }
-//   //
-//   // const createPostHandler = () => {
-//   //   setError(summaryRef, setSummaryError)
-//   //   setError(textRef, setTextError)
-//   //
-//   //   if(summaryError || textError) {
-//   //     return
-//   //   }
-//   //
-//   //   dispatch(createPostActions.addNewPost({
-//   //     summary: summaryRef.current.value.trim(),
-//   //     text: textRef.current.value.trim(),
-//   //     type: typeRef.current.value
-//   //   }))
-//   //
-//   //   summaryRef.current.value = ''
-//   //   textRef.current.value = ''
-//   //   typeRef.current.value = 'Note'
-//   // }
-//   //
-//   // useEffect(() => {
-//   //   console.log(show, 'before if')
-//   //   if(isInitial) {
-//   //     isInitial = false
-//   //
-//   //     return
-//   //   }
-//   //
-//   //   dispatch(uiActions.toggle())
-//   //   console.log(show, 'effect started')
-//   //   dispatch(sendPostData(post))
-//   //
-//   //   const timer = setTimeout(() => {
-//   //     dispatch(uiActions.toggle())
-//   //   }, 2000)
-//   //
-//   //   return () => clearTimeout(timer)
-//   // }, [post, dispatch, show])
-//   //
-//   const summaryClass = summaryError ? 'error-message__input' : ''
-//   const textClass = textError ? 'error-message__input' : ''
+  const navigation = useNavigation()
+  const loaderData = useLoaderData()
+  const [loading, setLoading] = useState(false)
+  console.log(loaderData)
+
+  useEffect(() => {
+    console.log(navigation.state)
+    let timer
+    if (navigation.state === 'submitting') {
+      setLoading(true)
+
+      timer = setTimeout(() => {
+        setLoading(false)
+      }, 1500)
+    }
+
+    // return () =>  clearTimeout(timer)
+  }, [navigation.state])
 
   return (
-    // <WrapperComponent className="createPostComponent-wrapper">
-    //
-    //   <h2 className="createPostComponent-header">Create New Post</h2>
-    //
-    //   {/*{show && <Notification*/}
-    //   {/*  status={notification.status}*/}
-    //   {/*  title={notification.title}*/}
-    //   {/*  message={notification.message}*/}
-    //   {/*/>}*/}
-    //
-    //   <div className="mb-3">
-    //     <label className="form-label">Summary *</label>
-    //     <input
-    //       ref={summaryRef}
-    //       // onChange={summaryChangeHandler}
-    //       type="text"
-    //       className={`form-control ${summaryClass}`}
-    //       placeholder="Enter your summary"
-    //     />
-    //     {/*{summaryError && <p className="error-message">Summary should have at least 3 characters</p>}*/}
-    //   </div>
-    //   <div className="mb-3">
-    //     <label className="form-label">Text *</label>
-    //     <textarea
-    //       ref={textRef}
-    //       // onChange={textChangeHandler}
-    //       className={`form-control ${textClass}`}
-    //       placeholder="Enter your article text"
-    //     />
-    //     {/*{textError && <p className="error-message">Text should have at least 3 characters</p>}*/}
-    //   </div>
-    //
-    //   <div className="input-group mb-3">
-    //     <select ref={typeRef} onChange={typeChangeHandler} className="form-select">
-    //       <option defaultValue>Note</option>
-    //       <option>News</option>
-    //     </select>
-    //     <label className="input-group-text">Options</label>
-    //   </div>
-    //
-    //   <Button type="button" className="btn btn-success" onClick={createPostHandler}>Save</Button>
-    //
-    // </WrapperComponent>
-
     <WrapperComponent className="createPostComponent-wrapper">
-
-      <h2 className="createPostComponent-header">Create New Post</h2>
-
-      <div className="mb-3">
-        <label className="form-label">Summary *</label>
-        <input
-          type="text"
-          className={`form-control`}
-          placeholder="Enter your summary"
+      {
+        loading && <Notification
+          status="submitting"
+          title="Submitting"
+          message="Submitting New Post to the server!"
         />
-      </div>
-      <div className="mb-3">
-        <label className="form-label">Text *</label>
-        <textarea
-          className={`form-control`}
-          placeholder="Enter your article text"
-        />
-      </div>
+      }
 
-      <div className="input-group mb-3">
-        <select className="form-select">
-          <option defaultValue>Note</option>
-          <option>News</option>
-        </select>
-        <label className="input-group-text">Options</label>
-      </div>
+      <Form method='post'>
+        <h2 className="createPostComponent-header">Create New Post</h2>
 
-      <Button type="button" className="btn btn-success">Save</Button>
+        <div className="mb-3">
+          <label className="form-label">Summary *</label>
+          <input
+            name="summary"
+            type="text"
+            className={`form-control`}
+            placeholder="Enter your summary"
+          />
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Text *</label>
+          <textarea
+            name="text"
+            className={`form-control`}
+            placeholder="Enter your article text"
+          />
+        </div>
+
+        <div className="input-group mb-3">
+          <select name="type" className="form-select">
+            <option defaultValue>Note</option>
+            <option>News</option>
+          </select>
+          <label className="input-group-text">Options</label>
+        </div>
+
+        <Button
+          type="submit"
+          className="btn btn-success"
+          disabled={loading}
+        >
+          Save
+        </Button>
+      </Form>
 
     </WrapperComponent>
   )
+}
+
+export const sendPost = async ({request, params}) => {
+  const url = 'https://wfm-js-blog-463dd-default-rtdb.europe-west1.firebasedatabase.app/posts.json'
+  const data = await request.formData()
+  const payload = {
+    method: 'POST',
+    body: JSON.stringify({
+      summary: data.get('summary'),
+      text: data.get('text'),
+      type: data.get('type'),
+      isFavorite: false,
+      time: moment().format('MMMM Do YYYY, h:mm:ss a')
+    })
+  }
+
+  try {
+    const response = await fetch(url, payload)
+
+    if(!response?.ok) {
+      throw json({message: 'The Post isn\'t saved!'}, {status: 500})
+    }
+  } catch {
+    throw json({message: 'Server doesn\'t available at this moment!'}, {status: 404})
+  }
+
+  return redirect('/post/create')
+  // redirect('')
+  // return {message: 'Post have been created!'}
 }

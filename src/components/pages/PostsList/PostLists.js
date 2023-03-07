@@ -1,40 +1,62 @@
 import React from "react";
-import {useLoaderData} from 'react-router-dom';
+import {useLoaderData, useNavigation, json} from 'react-router-dom';
 import WrapperComponent from "../../UI/WrapperComponent/WrapperComponent";
 import Post from "../Post/Post";
+import Notification from "../../Notification/Notification";
+import './PostLists.scss';
 
 const PostLists = () => {
   const data = useLoaderData()
+  const navigation = useNavigation()
+
+  console.log(navigation.state)
 
   const posts = []
 
-  for(let key in data) {
+  for (let key in data) {
     posts.unshift({
       id: key,
       summary: data[key].summary,
       text: data[key].text,
-      type: data[key].type
+      type: data[key].type,
+      time: data[key].time,
+      isFavourite: data[key].isFavourite
     })
   }
 
   return (
     <WrapperComponent>
-      {posts.map(post => {
-        return (
-          <Post
-            key={post.id}
-            summary={post.summary}
-            text={post.text}
-            type={post.type}
-          />)
-      })}
+      {
+        navigation.state === 'loading' && <Notification
+          status="pending"
+          title="Pending"
+          message="Loading Posts data from server."
+        />
+      }
+
+      <ul className="post-lists__container">
+        {posts.map(post => {
+          return (
+            <li key={post.id} className="post-lists__item">
+              <Post
+                id={post.id}
+                time={post.time}
+                summary={post.summary}
+                text={post.text}
+                type={post.type}
+                isFavorite={post.isFavorite}
+              />
+            </li>
+          )
+        })}
+      </ul>
     </WrapperComponent>
   )
 }
 
 export default PostLists;
 
-export const postListsLoader = async () => {
+export const postsLoader = async () => {
   const url = 'https://wfm-js-blog-463dd-default-rtdb.europe-west1.firebasedatabase.app/posts.json'
 
   try {
@@ -42,7 +64,7 @@ export const postListsLoader = async () => {
     const data = await response.json()
 
     return data
-  } catch (error) {
-    console.error(error)
+  } catch {
+    throw json({message: 'Could not load Posts!'}, {status: 500})
   }
 }
