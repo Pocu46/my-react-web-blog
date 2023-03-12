@@ -2,34 +2,34 @@ import React, {useEffect, useState} from "react";
 import './CreatePostComponent.scss';
 import WrapperComponent from "../../UI/WrapperComponent/WrapperComponent";
 import Button from "../../UI/Button/Button";
-import {Form, json, redirect, useNavigation, useLoaderData} from "react-router-dom";
+import {Form, json, redirect, useNavigation} from "react-router-dom";
 import Notification from "../../Notification/Notification";
 import moment from 'moment';
 
 export const CreatePostComponent = () => {
   const navigation = useNavigation()
-  const loaderData = useLoaderData()
-  const [loading, setLoading] = useState(false)
-  console.log(loaderData)
+  // const [loading, setLoading] = useState(false)
 
-  useEffect(() => {
-    console.log(navigation.state)
-    let timer
-    if (navigation.state === 'submitting') {
-      setLoading(true)
+  const isSubmitting = navigation.state === 'submitting'
 
-      timer = setTimeout(() => {
-        setLoading(false)
-      }, 1500)
-    }
-
-    // return () =>  clearTimeout(timer)
-  }, [navigation.state])
+  // useEffect(() => {
+  //   let timer
+  //   if (navigation.state === 'submitting') {
+  //     setLoading(true)
+  //
+  //     timer = setTimeout(() => {
+  //       setLoading(false)
+  //     }, 1500)
+  //   }
+  //
+  //   // return () =>  clearTimeout(timer)
+  // }, [navigation.state])
 
   return (
     <WrapperComponent className="createPostComponent-wrapper">
       {
-        loading && <Notification
+        // loading && <Notification
+        isSubmitting && <Notification
           status="submitting"
           title="Submitting"
           message="Submitting New Post to the server!"
@@ -46,6 +46,7 @@ export const CreatePostComponent = () => {
             type="text"
             className={`form-control`}
             placeholder="Enter your summary"
+            required
           />
         </div>
         <div className="mb-3">
@@ -54,11 +55,15 @@ export const CreatePostComponent = () => {
             name="text"
             className={`form-control`}
             placeholder="Enter your article text"
+            required
           />
         </div>
 
         <div className="input-group mb-3">
-          <select name="type" className="form-select">
+          <select
+            name="type"
+            className="form-select"
+          >
             <option defaultValue>Note</option>
             <option>News</option>
           </select>
@@ -68,9 +73,10 @@ export const CreatePostComponent = () => {
         <Button
           type="submit"
           className="btn btn-success"
-          disabled={loading}
+          // disabled={loading}
+          disabled={isSubmitting}
         >
-          Save
+          {isSubmitting ? 'Submitting...' : 'Save'}
         </Button>
       </Form>
 
@@ -103,6 +109,5 @@ export const sendPost = async ({request, params}) => {
   }
 
   return redirect('/post/create')
-  // redirect('')
   // return {message: 'Post have been created!'}
 }

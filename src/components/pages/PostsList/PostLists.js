@@ -1,5 +1,5 @@
 import React from "react";
-import {useLoaderData, useNavigation, json} from 'react-router-dom';
+import {useLoaderData, useNavigation, json, Outlet} from 'react-router-dom';
 import WrapperComponent from "../../UI/WrapperComponent/WrapperComponent";
 import Post from "../Post/Post";
 import Notification from "../../Notification/Notification";
@@ -8,8 +8,6 @@ import './PostLists.scss';
 const PostLists = () => {
   const data = useLoaderData()
   const navigation = useNavigation()
-
-  console.log(navigation.state)
 
   const posts = []
 
@@ -25,7 +23,7 @@ const PostLists = () => {
   }
 
   return (
-    <WrapperComponent>
+    <WrapperComponent className="post-lists__position">
       {
         navigation.state === 'loading' && <Notification
           status="pending"
@@ -50,6 +48,9 @@ const PostLists = () => {
           )
         })}
       </ul>
+
+      <Outlet/>
+
     </WrapperComponent>
   )
 }

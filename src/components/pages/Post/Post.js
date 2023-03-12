@@ -1,15 +1,22 @@
 import React from "react";
+import {useNavigate} from 'react-router-dom';
 import WrapperComponent from "../../UI/WrapperComponent/WrapperComponent";
 import Button from "../../UI/Button/Button";
 import './Post.scss'
 
 const Post = ({id, summary, text, type, time, isFavorite}) => {
+  const navigate = useNavigate()
+
   const typeClass = type === 'Note' ? 'post-header__type' : 'post-header__type news'
+
+  const editPostHandler = () => {
+    navigate(`${id}/edit`)
+  }
 
   return (
     <WrapperComponent className="post-wrapper">
       <header className="post-header">
-        <p>{time}</p>
+        <p className="post-header__text">{time}</p>
         <p>
           <b>{summary}</b>
         </p>
@@ -22,7 +29,7 @@ const Post = ({id, summary, text, type, time, isFavorite}) => {
         <Button
           className="blue"
           type="button"
-          onClick={() => console.log('Edit', id)}
+          onClick={editPostHandler}
         >
           Edit
         </Button>
@@ -42,7 +49,7 @@ const Post = ({id, summary, text, type, time, isFavorite}) => {
         </Button>
       </footer>
     </WrapperComponent>
-)
+  )
 }
 
 export default Post;
