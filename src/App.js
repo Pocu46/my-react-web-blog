@@ -6,7 +6,7 @@ import PostLists, {postsLoader} from "./components/pages/PostsList/PostLists";
 import Header from "./components/UI/Header/Header";
 import {CreatePostComponent, sendPost} from "./components/pages/CreatePostComponent/CreatePostComponent";
 import ErrorPage from "./components/pages/ErrorPage/ErrorPage";
-import EditPost from "./components/pages/EditPost/EditPost";
+import EditPost, {editPost} from "./components/pages/EditPost/EditPost";
 
 export const router = createBrowserRouter([
   {
@@ -33,8 +33,9 @@ export const router = createBrowserRouter([
             loader: postsLoader,
             children: [
               {
-                path: ':id/edit',
-                element: <EditPost />
+                path: ':id/edit/:summary/:text/:type',
+                element: <EditPost />,
+                action: editPost
               },
               {
                 path: ':id/delete',

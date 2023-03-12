@@ -10,7 +10,7 @@ const Post = ({id, summary, text, type, time, isFavorite}) => {
   const typeClass = type === 'Note' ? 'post-header__type' : 'post-header__type news'
 
   const editPostHandler = () => {
-    navigate(`${id}/edit`)
+    navigate(`${id}/edit/${summary}/${text}/${type}`)
   }
 
   return (
