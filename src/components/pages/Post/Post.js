@@ -1,11 +1,14 @@
 import React from "react";
-import {useNavigate} from 'react-router-dom';
+import {Form, json, redirect, useNavigate, useSubmit} from 'react-router-dom';
 import WrapperComponent from "../../UI/WrapperComponent/WrapperComponent";
 import Button from "../../UI/Button/Button";
 import './Post.scss'
 
 const Post = ({id, summary, text, type, time, isFavorite}) => {
   const navigate = useNavigate()
+  const submit = useSubmit()
+
+  let method = 'patch'
 
   const typeClass = type === 'Note' ? 'post-header__type' : 'post-header__type news'
 
@@ -13,43 +16,77 @@ const Post = ({id, summary, text, type, time, isFavorite}) => {
     navigate(`${id}/edit/${summary}/${text}/${type}`)
   }
 
+  const deleteHandler = () => {
+    const isDelete = window.confirm(`Are you sure you want to delete ${type}?`)
+
+    if(isDelete) {
+      method = 'delete'
+      submit({id}, {method: 'delete'})
+    }
+  }
+
   return (
     <WrapperComponent className="post-wrapper">
-      <header className="post-header">
-        <p className="post-header__text">{time}</p>
-        <p>
-          <b>{summary}</b>
-        </p>
-        <span className={typeClass}>{type}</span>
-      </header>
+      <Form method={method} action="/post/lists">
+        <header className="post-header">
+          <p className="post-header__text">{time}</p>
+          <p>
+            <b>{summary}</b>
+          </p>
+          <span className={typeClass}>{type}</span>
+        </header>
 
-      <p className="post-text">{text}</p>
+        <p className="post-text">{text}</p>
 
-      <footer className="post-footer">
-        <Button
-          className="blue"
-          type="button"
-          onClick={editPostHandler}
-        >
-          Edit
-        </Button>
-        <Button
-          className="red"
-          type="button"
-          onClick={() => console.log('Delete')}
-        >
-          Delete
-        </Button>
-        <Button
-          className="yellow"
-          type="button"
-          onClick={() => console.log('Favorite')}
-        >
-          Favorite
-        </Button>
-      </footer>
+        <footer className="post-footer">
+          <Button
+            className="blue"
+            type="submit"
+            onClick={editPostHandler}
+          >
+            Edit
+          </Button>
+          <Button
+            className="red"
+            type="submit"
+            onClick={deleteHandler}
+          >
+            Delete
+          </Button>
+          <Button
+            className="yellow"
+            type="button"
+            onClick={() => console.log('Favorite')}
+          >
+            {isFavorite ? 'Favorite' : 'Unfavorite'}
+          </Button>
+        </footer>
+      </Form>
     </WrapperComponent>
   )
 }
 
 export default Post;
+
+export const postAction = async ({request}) => {
+  const data = await request.formData()
+  const url = `https://wfm-js-blog-463dd-default-rtdb.europe-west1.firebasedatabase.app/posts/${data.get('id')}.json`
+  const payload = {
+    method: request.method,
+    body: JSON.stringify({
+      isFavorite: data.get('isFavorite')
+    })
+  }
+
+  try {
+    const response = await fetch(url, payload)
+
+    if(!response?.ok) {
+      throw json({message: 'The Post isn\'t deleted!'}, {status: 500})
+    }
+  } catch {
+    throw json({message: 'Server doesn\'t available at this moment!'}, {status: 404})
+  }
+
+  return redirect('/post/lists')
+}

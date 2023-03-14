@@ -5,7 +5,7 @@ import React from "react";
 import moment from "moment";
 
 const EditPost = () => {
-  const {id, summary, text, type} = useParams()
+  const {summary, text, type} = useParams()
 
   return (
     <Modal>

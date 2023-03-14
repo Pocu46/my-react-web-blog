@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import './CreatePostComponent.scss';
 import WrapperComponent from "../../UI/WrapperComponent/WrapperComponent";
 import Button from "../../UI/Button/Button";
@@ -8,27 +8,12 @@ import moment from 'moment';
 
 export const CreatePostComponent = () => {
   const navigation = useNavigation()
-  // const [loading, setLoading] = useState(false)
 
   const isSubmitting = navigation.state === 'submitting'
-
-  // useEffect(() => {
-  //   let timer
-  //   if (navigation.state === 'submitting') {
-  //     setLoading(true)
-  //
-  //     timer = setTimeout(() => {
-  //       setLoading(false)
-  //     }, 1500)
-  //   }
-  //
-  //   // return () =>  clearTimeout(timer)
-  // }, [navigation.state])
 
   return (
     <WrapperComponent className="createPostComponent-wrapper">
       {
-        // loading && <Notification
         isSubmitting && <Notification
           status="submitting"
           title="Submitting"
@@ -73,7 +58,6 @@ export const CreatePostComponent = () => {
         <Button
           type="submit"
           className="btn btn-success"
-          // disabled={loading}
           disabled={isSubmitting}
         >
           {isSubmitting ? 'Submitting...' : 'Save'}
@@ -90,8 +74,8 @@ export const sendPost = async ({request, params}) => {
   const payload = {
     method: 'POST',
     body: JSON.stringify({
-      summary: data.get('summary'),
-      text: data.get('text'),
+      summary: data.get('summary').trim(),
+      text: data.get('text').trim(),
       type: data.get('type'),
       isFavorite: false,
       time: moment().format('MMMM Do YYYY, h:mm:ss a')
@@ -108,6 +92,5 @@ export const sendPost = async ({request, params}) => {
     throw json({message: 'Server doesn\'t available at this moment!'}, {status: 404})
   }
 
-  return redirect('/post/create')
-  // return {message: 'Post have been created!'}
+  return redirect('/post/lists')
 }
