@@ -16,11 +16,11 @@ const Post = ({id, summary, text, type, time, isFavorite}) => {
   const typeClass = type === 'Note' ? 'post-header__type' : 'post-header__type news'
 
   const editPostHandler = () => {
-    navigate(`${id}/edit/${summary}/${text}/${type}`)
+    navigate(`/post/lists/${id}/edit/${summary}/${text}/${type}`)
   }
 
   const deleteHandler = () => {
-    const isDelete = window.confirm(`Are you sure you want to delete ${type}?`)
+    const isDelete = window.confirm(`Are you sure you want to delete '${summary}' ${type}?`)
 
     if (isDelete) {
       method = 'delete'

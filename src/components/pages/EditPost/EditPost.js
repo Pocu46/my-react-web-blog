@@ -7,7 +7,6 @@ import moment from "moment";
 const EditPost = () => {
   const {summary, text, type} = useParams()
 
-
   return (
     <Modal>
       <Form

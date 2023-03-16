@@ -8,6 +8,7 @@ import {CreatePostComponent, sendPost} from "./components/pages/CreatePostCompon
 import ErrorPage from "./components/pages/ErrorPage/ErrorPage";
 import EditPost, {editPost} from "./components/pages/EditPost/EditPost";
 import {postAction} from "./components/pages/Post/Post";
+import FavoritePosts from "./components/pages/FavoritePosts/FavoritePosts";
 
 export const router = createBrowserRouter([
   {
@@ -38,12 +39,14 @@ export const router = createBrowserRouter([
                 path: ':id/edit/:summary/:text/:type',
                 element: <EditPost />,
                 action: editPost
-              },
+              }
             ]
           },
           {
             path: 'favorites',
-            element: <h1>Favorites</h1>
+            element: <FavoritePosts />,
+            loader: postsLoader,
+            action: postAction
           },
         ]
       }
