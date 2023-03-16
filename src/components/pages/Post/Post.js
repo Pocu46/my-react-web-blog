@@ -41,12 +41,14 @@ const Post = ({id, summary, text, type, time, isFavorite}) => {
           <p>
             <b>{summary}</b>
           </p>
-          <span className={typeClass}>{type}</span>
-          <img
-            className="post-favorite__icon"
-            src={favoriteIcon}
-            alt="favorite-icon"
-          />
+          <div className="post-icons__wrapper">
+            <span className={typeClass}>{type}</span>
+            <img
+              className="post-favorite__icon"
+              src={favoriteIcon}
+              alt="favorite-icon"
+            />
+          </div>
         </header>
 
         <p className="post-text">{text}</p>
