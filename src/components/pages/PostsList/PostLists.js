@@ -18,7 +18,7 @@ const PostLists = () => {
       text: data[key].text,
       type: data[key].type,
       time: data[key].time,
-      isFavourite: data[key].isFavourite
+      isFavorite: data[key].isFavorite
     })
   }
 
