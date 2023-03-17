@@ -1,8 +1,10 @@
+import React from "react";
 import Modal from "../../UI/Modal/Modal";
 import Button from "../../UI/Button/Button";
 import {Form, json, redirect, useParams} from "react-router-dom";
-import React from "react";
 import moment from "moment";
+import '../CreatePostComponent/CreatePostComponent.scss';
+import WrapperComponent from "../../UI/WrapperComponent/WrapperComponent";
 
 const EditPost = () => {
   const {summary, text, type} = useParams()
@@ -14,51 +16,51 @@ const EditPost = () => {
         method="patch"
         onClick={(event) => {event.stopPropagation()}}
       >
+        <WrapperComponent className="createPostComponent-wrapper">
+          <h2 className="createPostComponent-header">Edit Post</h2>
 
-        <h2 className="createPostComponent-header">Edit Post</h2>
+          <div className="mb-3">
+            <label className="form-label">Summary *</label>
+            <input
+              name="editedSummary"
+              type="text"
+              className={`form-control`}
+              placeholder="Enter your summary"
+              defaultValue={summary}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Text *</label>
+            <textarea
+              name="editedText"
+              className={`form-control`}
+              placeholder="Enter your article text"
+              defaultValue={text}
+              required
+            />
+          </div>
 
-        <div className="mb-3">
-          <label className="form-label">Summary *</label>
-          <input
-            name="editedSummary"
-            type="text"
-            className={`form-control`}
-            placeholder="Enter your summary"
-            defaultValue={summary}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Text *</label>
-          <textarea
-            name="editedText"
-            className={`form-control`}
-            placeholder="Enter your article text"
-            defaultValue={text}
-            required
-          />
-        </div>
+          <div className="input-group mb-3">
+            <select
+              name="editedType"
+              className="form-select"
+              defaultValue={type}
+            >
+              <option defaultValue>Note</option>
+              <option>News</option>
+            </select>
+            <label className="input-group-text">Options</label>
+          </div>
 
-        <div className="input-group mb-3">
-          <select
-            name="editedType"
-            className="form-select"
-            defaultValue={type}
+          <Button
+            type="submit"
+            className="btn btn-success"
+            // disabled={loading}
           >
-            <option defaultValue>Note</option>
-            <option>News</option>
-          </select>
-          <label className="input-group-text">Options</label>
-        </div>
-
-        <Button
-          type="submit"
-          className="btn btn-success"
-          // disabled={loading}
-        >
-          Save
-        </Button>
-
+            Save
+          </Button>
+        </WrapperComponent>
       </Form>
     </Modal>
   )

@@ -13,7 +13,6 @@ const Modal = ({children}) => {
   return (
     <div className="modal-position__wrapper">
       <div className="modal-wrapper" onClick={closeHandler}>
-      {/*<div className="modal-wrapper">*/}
         {children}
       </div>
     </div>
