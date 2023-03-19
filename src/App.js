@@ -3,17 +3,17 @@ import {Home} from "./components/pages/Home/Home";
 import {Article} from "./components/pages/Article/Article";
 import {createBrowserRouter} from "react-router-dom";
 import PostLists, {postsLoader} from "./components/pages/PostsList/PostLists";
-import Header from "./components/UI/Header/Header";
 import {CreatePostComponent, sendPost} from "./components/pages/CreatePostComponent/CreatePostComponent";
 import ErrorPage from "./components/pages/ErrorPage/ErrorPage";
 import EditPost, {editPost} from "./components/pages/EditPost/EditPost";
 import {postAction} from "./components/pages/Post/Post";
 import FavoritePosts from "./components/pages/FavoritePosts/FavoritePosts";
+import Root from "./components/pages/Root/Root";
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <Header/>,
+    element: <Root/>,
     errorElement: <ErrorPage />,
     children: [
       {
@@ -47,7 +47,12 @@ export const router = createBrowserRouter([
             element: <FavoritePosts />,
             loader: postsLoader,
             action: postAction
-          },
+          }
+          // {
+          //   path: ':id/edit/:summary/:text/:type',
+          //   element: <EditPost />,
+          //   action: editPost
+          // }
         ]
       }
     ]
@@ -57,7 +62,7 @@ export const router = createBrowserRouter([
 const App = () => {
   return (
     <div className="wrapper">
-      <Header/>
+      <Root/>
     </div>
   )
 }

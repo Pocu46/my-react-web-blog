@@ -17,6 +17,7 @@ const Post = ({id, summary, text, type, time, isFavorite}) => {
 
   const editPostHandler = () => {
     navigate(`/post/lists/${id}/edit/${summary}/${text}/${type}`)
+    // navigate(`/post/${id}/edit/${summary}/${text}/${type}`)
   }
 
   const deleteHandler = () => {
@@ -121,4 +122,5 @@ export const postAction = async ({request}) => {
   }
 
   return redirect('/post/lists')
+  // return redirect(1)
 }

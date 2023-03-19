@@ -1,6 +1,6 @@
 import React from "react";
 import './Header.scss';
-import {NavLink, Outlet} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
 const Header = () => {
   return(
@@ -9,8 +9,6 @@ const Header = () => {
         <NavLink to="/" className="header-link">Home</NavLink>
         <p className="header-text">Create your posts to save them!</p>
       </header>
-
-      <Outlet />
     </>
   )
 }

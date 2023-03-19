@@ -2,6 +2,7 @@ import React from "react";
 import './Home.scss'
 import Button from "../../UI/Button/Button";
 import {useNavigate} from "react-router-dom";
+import Header from "../../UI/Header/Header";
 
 export const Home = () => {
   const navigate = useNavigate()
@@ -11,16 +12,19 @@ export const Home = () => {
   }
 
   return (
-    <div className="home-wrapper">
+    <div className="home-page__wrapper">
+      <Header />
 
-      <h1 className="home-title">My React Web Blog</h1>
+      <div className="home-wrapper">
+        <h1 className="home-title">My React Web Blog</h1>
 
-      <p className="home-text">
-        Add articles and save them to favorites.
-      </p>
+        <p className="home-text">
+          Add articles and save them to favorites.
+        </p>
 
-      <Button type="button" className="home-button" onClick={startAppHandler}>Start</Button>
+        <Button type="button" className="home-button" onClick={startAppHandler}>Start</Button>
 
+      </div>
     </div>
   )
 }

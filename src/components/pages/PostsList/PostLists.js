@@ -1,13 +1,16 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {useLoaderData, useNavigation, json, Outlet} from 'react-router-dom';
 import WrapperComponent from "../../UI/WrapperComponent/WrapperComponent";
 import Post from "../Post/Post";
 import Notification from "../../Notification/Notification";
 import './PostLists.scss';
+import Dropdown from "../../UI/Dropdown/Dropdown";
 
 const PostLists = () => {
   const data = useLoaderData()
   const navigation = useNavigation()
+  const [filter, setFilter] = useState('All')
+  const [filteredArray, setFilteredArray] = useState([])
 
   const posts = []
 
@@ -22,6 +25,26 @@ const PostLists = () => {
     })
   }
 
+  useEffect(() => {
+    if(filter === 'All') {
+      setFilteredArray([...posts])
+    }
+    if(filter === 'Notes') {
+      setFilteredArray(posts.filter(post => {
+        if(post.type === 'Note') {
+          return true
+        }
+      }))
+    }
+    if(filter === 'News') {
+      setFilteredArray(posts.filter(post => {
+        if(post.type === 'News') {
+          return true
+        }
+      }))
+    }
+  }, [filter, data])
+
   return (
     <WrapperComponent className="post-lists__position">
       {
@@ -32,8 +55,10 @@ const PostLists = () => {
         />
       }
 
+      <Dropdown setFilter={setFilter} />
+
       <ul className="post-lists__container">
-        {posts.map(post => {
+        {filteredArray.map(post => {
           return (
             <li key={post.id} className="post-lists__item">
               <Post

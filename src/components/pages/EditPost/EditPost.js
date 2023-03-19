@@ -92,4 +92,5 @@ export const editPost = async ({request, params}) => {
   }
 
   return redirect('/post/lists')
+  // return redirect(1)
 }
