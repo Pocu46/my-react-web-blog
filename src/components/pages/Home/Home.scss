@@ -1,6 +1,7 @@
 .home-page__wrapper {
-  //height: 100vh;
+  height: 100vh;
   //width: 100%;
+  //min-height: 100%;
 
   .home-wrapper {
     display: flex;
@@ -8,7 +9,9 @@
     justify-content: center;
     align-items: center;
     background: yellowgreen;
-    height: 100vh;
+    //min-height: 100vh;
+    //min-height: 95%;
+    min-height: calc(100vh - 63px);
     width: 100%;
 
     .home-title {
