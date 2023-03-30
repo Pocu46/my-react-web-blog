@@ -3,11 +3,12 @@ import {useNavigate} from 'react-router-dom';
 import './Modal.scss';
 
 
-const Modal = ({children}) => {
-  const navigate = useNavigate()
+const Modal = ({children, setIsEditVisible}) => {
+  // const navigate = useNavigate()
 
   const closeHandler = () => {
-    navigate('/post/lists')
+    // navigate('/post/lists')
+    setIsEditVisible(false)
   }
 
   return (

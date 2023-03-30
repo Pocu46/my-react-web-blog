@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {Form, json, redirect, useNavigate, useSubmit} from 'react-router-dom';
 import WrapperComponent from "../../UI/WrapperComponent/WrapperComponent";
 import Button from "../../UI/Button/Button";
@@ -6,8 +6,8 @@ import star from '../../UI/starIcons/star.png';
 import goldStar from '../../UI/starIcons/star (2).png';
 import './Post.scss'
 
-const Post = ({id, summary, text, type, time, isFavorite}) => {
-  const navigate = useNavigate()
+const Post = ({id, summary, text, type, time, isFavorite, setEditPostData, setIsEditVisible}) => {
+  // const navigate = useNavigate()
   const submit = useSubmit()
 
   let method = 'patch'
@@ -16,7 +16,16 @@ const Post = ({id, summary, text, type, time, isFavorite}) => {
   const typeClass = type === 'Note' ? 'post-header__type' : 'post-header__type news'
 
   const editPostHandler = () => {
-    navigate(`/post/lists/${id}/edit/${summary}/${text}/${type}`)
+    // navigate(`/post/lists/${id}/edit/${summary}/${text}/${type}`)
+
+    setEditPostData({
+      id,
+      summary,
+      text,
+      type
+    })
+
+    setIsEditVisible(true)
   }
 
   const deleteHandler = () => {
