@@ -9,7 +9,7 @@ export const Article = () => {
 
   return(
     <>
-      <Header />
+      {/*<Header />*/}
 
       <WrapperComponent className="article-wrapper">
         <ul className="nav nav-tabs">

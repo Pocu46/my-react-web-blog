@@ -1,5 +1,6 @@
 import Header from "../../UI/Header/Header";
 import {useRouteError} from 'react-router-dom';
+import './ErrorPage.scss';
 
 const ErrorPage = () => {
   const error = useRouteError()
@@ -13,12 +14,12 @@ const ErrorPage = () => {
   }
 
   return(
-    <>
+    <div className="error-wrapper">
       <Header />
 
       <h1>{status}</h1>
       <p>{message}</p>
-    </>
+    </div>
   )
 }
 

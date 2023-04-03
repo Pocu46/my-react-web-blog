@@ -18,7 +18,7 @@ const PostLists = () => {
   const [doReload, setDoReload] = useState(false)
 
   useEffect(() => {
-    console.log(isEditVisible)
+    // console.log(isEditVisible)
     // redirect('/post/lists')
 
     if(doReload) {
