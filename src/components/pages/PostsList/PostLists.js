@@ -1,33 +1,16 @@
 import React, {useEffect, useState} from "react";
-import {useLoaderData, useNavigation, json, Outlet, redirect, useNavigate} from 'react-router-dom';
+import {useLoaderData, useNavigation, json, Outlet} from 'react-router-dom';
 import WrapperComponent from "../../UI/WrapperComponent/WrapperComponent";
 import Post from "../Post/Post";
 import Notification from "../../Notification/Notification";
 import './PostLists.scss';
 import Dropdown from "../../UI/Dropdown/Dropdown";
-import EditPost from "../EditPost/EditPost";
 
 const PostLists = () => {
-  const navigate = useNavigate()
   const data = useLoaderData()
   const navigation = useNavigation()
   const [filter, setFilter] = useState('All')
   const [filteredArray, setFilteredArray] = useState([])
-  const [isEditVisible, setIsEditVisible] = useState(false)
-  const [editPostData, setEditPostData] = useState({})
-  const [doReload, setDoReload] = useState(false)
-
-  useEffect(() => {
-    // console.log(isEditVisible)
-    // redirect('/post/lists')
-
-    if(doReload) {
-      setDoReload(false)
-
-      navigate(0)
-    }
-    // navigate(0)
-  }, [doReload])
 
   const posts = []
 
@@ -85,8 +68,7 @@ const PostLists = () => {
                 text={post.text}
                 type={post.type}
                 isFavorite={post.isFavorite}
-                setIsEditVisible={setIsEditVisible}
-                setEditPostData={setEditPostData}
+                page="lists"
               />
             </li>
           )
@@ -94,16 +76,6 @@ const PostLists = () => {
       </ul>
 
       <Outlet/>
-
-      {
-        isEditVisible &&
-        <EditPost
-          setDoReload={setDoReload}
-          isEditVisible={isEditVisible}
-          setIsEditVisible={setIsEditVisible}
-          editPostData={editPostData}
-        />
-      }
 
     </WrapperComponent>
   )

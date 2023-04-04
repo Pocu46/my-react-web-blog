@@ -45,6 +45,7 @@ const FavoritePosts = () => {
                 text={post.text}
                 type={post.type}
                 isFavorite={post.isFavorite}
+                page="favorites"
               />
             </li>
           )

@@ -6,8 +6,8 @@ import star from '../../UI/starIcons/star.png';
 import goldStar from '../../UI/starIcons/star (2).png';
 import './Post.scss'
 
-const Post = ({id, summary, text, type, time, isFavorite, setEditPostData, setIsEditVisible}) => {
-  // const navigate = useNavigate()
+const Post = ({id, summary, text, type, time, isFavorite, page}) => {
+  const navigate = useNavigate()
   const submit = useSubmit()
 
   let method = 'patch'
@@ -16,16 +16,8 @@ const Post = ({id, summary, text, type, time, isFavorite, setEditPostData, setIs
   const typeClass = type === 'Note' ? 'post-header__type' : 'post-header__type news'
 
   const editPostHandler = () => {
-    // navigate(`/post/lists/${id}/edit/${summary}/${text}/${type}`)
-
-    setEditPostData({
-      id,
-      summary,
-      text,
-      type
-    })
-
-    setIsEditVisible(true)
+    // navigate(`/post/${id}/edit?page=${page}&summary=${summary}&text=${text}&type=${type}`)
+    navigate(`/post/${id}/edit/${page}/${summary}/${text}/${type}`)
   }
 
   const deleteHandler = () => {

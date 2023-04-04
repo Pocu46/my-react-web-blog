@@ -5,7 +5,7 @@ import {createBrowserRouter} from "react-router-dom";
 import PostLists, {postsLoader} from "./components/pages/PostsList/PostLists";
 import {CreatePostComponent, sendPost} from "./components/pages/CreatePostComponent/CreatePostComponent";
 import ErrorPage from "./components/pages/ErrorPage/ErrorPage";
-import {editPost} from "./components/pages/EditPost/EditPost";
+import EditPost, {editPost} from "./components/pages/EditPost/EditPost";
 import {postAction} from "./components/pages/Post/Post";
 import FavoritePosts from "./components/pages/FavoritePosts/FavoritePosts";
 import Root from "./components/pages/Root/Root";
@@ -34,13 +34,6 @@ export const router = createBrowserRouter([
             element: <PostLists />,
             loader: postsLoader,
             action: postAction,
-            children: [
-              // {
-              //   path: ':id/edit/:summary/:text/:type',
-              //   element: <EditPost />,
-              //   action: editPost
-              // }
-            ]
           },
           {
             path: 'favorites',
@@ -48,10 +41,12 @@ export const router = createBrowserRouter([
             loader: postsLoader,
             action: postAction
           },
-          // {
-          //   path: ':id/edit/',
-          //   action: editPost
-          // }
+          {
+            // path: ':id/edit?page=:page&summary=:summary&text=:text&type=:type',
+            path: ':id/edit/:page/:summary/:text/:type',
+            element: <EditPost />,
+            action: editPost
+          }
         ]
       }
     ]
