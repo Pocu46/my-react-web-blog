@@ -1,7 +1,9 @@
 import './WrapperComponent.scss'
 
-const WrapperComponent = props => {
-  return <div className={`content-wrapper ${props.className}`}>{props.children}</div>
+const WrapperComponent = ({className, children}) => {
+  return (
+    <div className={`content-wrapper ${className}`}>{children}</div>
+  )
 }
 
 export default WrapperComponent;

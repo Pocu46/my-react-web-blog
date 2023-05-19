@@ -1,0 +1,12 @@
+.article-wrapper {
+  margin: 0 auto;
+
+  .nav-tabs {
+    justify-content: center;
+
+    .active {
+      color: yellowgreen;
+      text-decoration: underline;
+    }
+  }
+}

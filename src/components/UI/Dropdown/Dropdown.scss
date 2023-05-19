@@ -1,0 +1,39 @@
+.dropdown {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100px;
+
+  .dropdown-button {
+    background: #1d7aea;
+    color: white;
+    border-radius: 10px;
+    width: 75px;
+    height: 35px;
+    border: none;
+  }
+
+  .dropdown-button:hover {
+    background: #0e2283;
+    color: yellowgreen;
+  }
+
+  .dropdown-container {
+    border: 2px solid #dedee5;
+    border-top: none;
+    border-radius: 10px;
+  }
+
+  .hide {
+    display: none;
+  }
+
+  .dropdown-item {
+    padding: 0 15px;
+  }
+
+  .dropdown-item:hover {
+    color: yellowgreen;
+    background: #0e2283;
+  }
+}

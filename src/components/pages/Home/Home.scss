@@ -1,0 +1,21 @@
+.home-page__wrapper {
+  height: calc(100vh - 63px);
+
+  .home-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: yellowgreen;
+    min-height: calc(100vh - 63px);
+    width: 100%;
+
+    .home-title {
+      text-align: center;
+    }
+
+    .home-button{
+      width: 126px;
+    }
+  }
+}
